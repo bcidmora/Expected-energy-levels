@@ -8,7 +8,7 @@ import ensembles_info as ens
 
 
     # Directory where the ExpectedEnergyLevels produced by Colins are
-energyLevelsLocation = os.path.expanduser('~')+'/Documents/Chroma-LapH_X451/ExpectedEnergyLevels/96x96x96_phys/'
+energyLevelsLocation = os.path.expanduser('~')+'/ExpectedEnergyLevels/96x96x96_phys/'
 
 
 unkwnownHads=False
