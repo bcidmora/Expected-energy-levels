@@ -1,11 +1,13 @@
 # Expected energy levels
 
 To run this script, the following libraries are needed:
+
     + pylatex
     + numpy
     + os
     + matplotlib
-
+    + Colin's expected energy levels for the E250
+    
 These scripts are organized as:
 
 ** expected_energy_levels.py ** 
