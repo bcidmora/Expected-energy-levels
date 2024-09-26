@@ -28,11 +28,13 @@ These scripts are organized as:
     - chosenThreshold: The cutoff value (three particles, a specific value or no cut)
     
     - hadronsInfo: This list contains all the hadrons that are known in all the ensembles in "ensembles_info.py". More hadron values can be added, but their mass values must be included for the ensemble in "ensembles_info.py". 
-    
-    Later, the process is the following: 
+
+Later, the process is the following: 
+
         * All energy values are computed using Colin's group theory (ENERGY_LIST_RAW). 
         * Then, a selection of levels is made according to the chosen cutoff (ENERGY_LIST_TABLES). 
-        * Finally, all tables are constructed according to this selection, if the tables are too long, they are separated in several pages (CONSTRUCTING_TABLES). 
+        * Finally, all tables are constructed according to this selection, if the tables are too long, 
+        they are separated in several pages (CONSTRUCTING_TABLES). 
         * When plotEnergyLevels==True, the plots can include thresholds.    
 
 ** tables_latex.py **
