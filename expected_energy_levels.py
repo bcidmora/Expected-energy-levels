@@ -232,7 +232,7 @@ if __name__=='__main__':
                                 
                                 if not noEnergyCut:
                                     final_energy_list=enf.ENERGY_LIST_TABLES(final_hadrons_list,chosenThreshold,threeParticleThreshold)
-                                    if len(final_energy_list)==0:break
+                                    #if len(final_energy_list)==0:break
                                 else: 
                                     final_energy_list=final_hadrons_list 
                                 tl.CONSTRUCTING_TABLES(doc,final_energy_list,tabHeaders, tabCaption)
