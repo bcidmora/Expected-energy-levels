@@ -78,6 +78,32 @@ ensE250 = {
     
 }
 
+ensD200 = {
+    "ens_name":"D200",
+    "cls_name": "D200r000",
+    "latt_spacing": 0.0633,
+    "s_extent": 64,
+    "t_extent": 128,
+    "beta": 3.55,
+    "ud_kappa": 0.1372,
+    "s_kappa": 0.136601748,
+    "clov_coeff": 1.8248654,
+    "cnfgs": 2000,
+    "pion_mass": 0.06533,
+    "kaon_mass": 0.15602,
+    "eta_mass": 0.1768,
+    "nucleon_mass": 0.3143,
+    # "etaprime_mass": 0.37, 
+    "lambda_mass": 0.3634,
+    "sigma_mass": 0.3830,
+    "xi_mass": 0.41543,
+    "delta_mass": 0.41402,
+    "lambda1405_mass": 0.46672#,
+    # "sigmastar_mass": 0.6142, 
+    # "xistar_mass": 0.6414,
+    # "omega_mass": 0.6683
+}
+
 ensB451 = {
     "ens_name":"B451",
     "cls_name": "B451r000",
