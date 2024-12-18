@@ -216,19 +216,20 @@ ensN451 = {
     "s_kappa": 0.1365480771,
     "clov_coeff": 1.915595,
     "cnfgs": 1011,
-    "pion_mass": 0.110047,
-    "kaon_mass": 0.1793,
-    "eta_mass": 0.2037,
+    "pion_mass": 0.1104732,
+    "kaon_mass": 0.1780265,
+    "eta_mass": 0.1858,
     "rho_mass": 0.293,
-    "nucleon_mass": 0.4075,
-    "etaprime_mass": 0.3607, 
-    "lambda_mass": 0.4437,
-    "sigma_mass": 0.4599,
-    "xi_mass": 0.4862,
-    "delta_mass": 0.5071,
-    "sigmastar_mass": 0.5446, 
-    "xistar_mass": 0.5768,
-    "omega_mass": 0.6051 
+    "nucleon_mass": 0.3965,
+    "etaprime_mass": 0.303, 
+    "lambda_mass": 0.4309,
+    "sigma_mass": 0.4492,
+    "xi_mass": 0.4758,
+    "delta_mass": 0.5141,
+    "sigmastar_mass": 0.5428, 
+    "lambda1405_mass": 0.56, # guessed value
+    "xistar_mass": 0.5728,
+    "omega_mass": 0.5979
 }
 
 ensN200 = {
@@ -358,7 +359,7 @@ ensX451 = {
     "xi_mass": 0.4758,
     "delta_mass": 0.5141,
     "sigmastar_mass": 0.5428, 
-    "lambda1405_mass": 0.56,
+    "lambda1405_mass": 0.56, # guessed value
     "xistar_mass": 0.5728,
     "omega_mass": 0.5979
 }
