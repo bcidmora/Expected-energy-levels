@@ -29,38 +29,68 @@ fmToMeV = 197.327 # This is to convert to MeV
 #                                                      #
 ########################################################
 
-    # transforms the momentum in lattice units to MeV units, where latt_size=a.
-def FM_TO_MEV(the_quantity, latt_size):
-    return the_quantity*fmToMeV/latt_size
+
+### transforms the momentum in lattice units to MeV units, where latt_size=a.
+# the_quantity: the variable to transform
+# the_latt_size: lattice constant a
+def FM_TO_MEV(the_quantity, the_latt_size):
+    return the_quantity*fmToMeV/the_latt_size
 
 
-    # transforms from MeV units to Lattice units, where latt_size=a.
-def MEV_TO_FM(the_quantity, latt_size):
-    return the_quantity*latt_size/fmToMeV
+### transforms from MeV units to Lattice units, where latt_size=a.
+# the_quatity: the variable to transform
+# the_latt_size: the lattice variable a
+def MEV_TO_FM(the_quantity, the_latt_size):
+    return the_quantity*the_latt_size/fmToMeV
 
 
-    # transforms the units of momentum in a volume (in the lattice) to units  of momentum in energy
-def MOMENTUM_COMPUTATION(the_sqred_mom_units, latt_extent):
-    return 2.* np.pi * (np.sqrt(float(the_sqred_mom_units))) / float(latt_extent)
+### transforms the units of momentum in a volume (in the lattice) to units  of momentum in energy
+# the_sqred_mom_units: The units of squared momentum, this is an integer
+# the_latt_size: the lattice constant a
+def MOMENTUM_COMPUTATION(the_sqred_mom_units, the_latt_size):
+    return 2.* np.pi * (np.sqrt(float(the_sqred_mom_units))) / float(the_latt_size)
 
 
-    # returns the energy squared
+### returns the energy squared where the momentum and mass are in the same units
+# the_had_mass: the hadron mass
+# the_had_mom: the hadron momentum 
 def RELATIVISTIC_RELATION(the_had_mass, the_had_mom):
     return the_had_mass**2 + the_had_mom**2
 
 
-    # reads a txt file with the info of the expected energy levels.
-def READ_TXT_FILE(name_file):
-    with open(name_file) as file: 
+### reads a txt file with the info of the expected energy levels.
+def READ_TXT_FILE(the_name_file):
+    with open(the_name_file) as file: 
         read_file = file.readlines()
     return read_file
 
 
-    # shifts the lab frame-energy to the CM frame
+### shifts the lab frame-energy to the CM frame
+# the_lab_energy: energy in the laboratory frame
+# the_momentum: the momentum in the center of mass frame
 def SHIFT_TO_ECM(the_lab_energy, the_momentum):
     return np.sqrt(the_lab_energy**2 - the_momentum**2)
 
 
+### This function returns the possible momentum combinations along x,y,z axis that give that total momentum squared
+# the_hadron: this is the hadron written as pi(0) for example:
+def POSSIBLE_MOMENTUM_HADRONS(the_hadron):
+    the_mom = int(the_hadron[the_hadron.index('(')+1:the_hadron.index(')')])
+    if the_mom==0:
+        return 'P = (0, 0, 0)'
+    elif the_mom==1:
+        return 'P = (k, 0, 0); k = 1/-1'
+    elif the_mom==2:
+        return 'P = (k, k, 0); k = 1/-1'
+    elif the_mom==3:
+        return 'P = (k, k, k); k = 1/-1'
+    elif the_mom==4:
+        return 'P = (k, 0, 0); k = 2/-2'
+    elif the_mom==5:
+        return 'P = (2, 1, 0)'
+    elif the_mom==6:
+        return 'P = (2, 1, 1)'
+#     
 
 #--------------  MODIFICATIONS TO THE HADRON NAME SCHEME  ---------------- 
 #-------------------  OR SOMETHING LIKE THAT ---------------- 
@@ -84,63 +114,63 @@ def SHIFT_TO_ECM(the_lab_energy, the_momentum):
 
 
 
-    # adds the momentum to the operator when there is no momentum in the operator name.
+### adds the momentum to the operator when there is no momentum in the operator name.
+# the_operator: is a string with all the operators in it such as pi_PSQ0_Sigma_PSQ3_isosinglet_0
+# the_sqred_lattice_momentum: is the squared momentum in the center of mass frame
 def HADRONS_INFO_AND_MOMENTUM(the_operator, the_sqred_lattice_momentum):
-    decomposed_operators = []
+    the_decomposed_operators = []
     if 'PSQ' not in the_operator:
-        decomposed_operators.append([the_operator, int(the_sqred_lattice_momentum)])
+        the_decomposed_operators.append([the_operator, int(the_sqred_lattice_momentum)])
     else:
-        list_the_operators = the_operator.split('_')
-        for i in range(0, len(list_the_operators)-2, 2):
-            da_mom = list_the_operators[i+1][3:]
+        the_list_the_operators = the_operator.split('_')
+        for i in range(0, len(the_list_the_operators)-2, 2):
+            da_mom = the_list_the_operators[i+1][3:]
             if len(da_mom)==1:
-                da_mom = list_the_operators[i+1][3]
+                da_mom = the_list_the_operators[i+1][3]
             elif len(da_mom)==2:
                 if da_mom[-1]=='A' or da_mom[-1]=='B':
-                    da_mom = list_the_operators[i+1][3]
+                    da_mom = the_list_the_operators[i+1][3]
                 else:
-                    da_mom = list_the_operators[i+1][3:]
+                    da_mom = the_list_the_operators[i+1][3:]
             elif len(da_mom)==3:
                 if da_mom[-1]=='A' or da_mom[-1]=='B':
-                    da_mom = list_the_operators[i+1][3:-1]
+                    da_mom = the_list_the_operators[i+1][3:-1]
                 else:
-                    da_mom = list_the_operators[i+1][3:]
-            decomposed_operators.append([list_the_operators[i], int(da_mom)])
-    return decomposed_operators
+                    da_mom = the_list_the_operators[i+1][3:]
+            the_decomposed_operators.append([the_list_the_operators[i], int(da_mom)])
+    return the_decomposed_operators
 
     
 
 
-    # separates the full operator string into separated hadrons with their momenta
+### separates the full operator string into separated hadrons with their momenta
+## the_operator_row: It containes the energy levels with its multiplicity and the energy value and it splits them into a list (new_operator_row)
 def SPLITTING_THE_OPERATORS_ROW(the_operator_row):
-    pos_1=the_operator_row.index("(")
-    pos_2=the_operator_row.index(")")
-    pos_3=the_operator_row.index("\n")
-    new_operator_row=[]
-    energy_val=float(the_operator_row[0:pos_1])
-    multiplicity_val=int(the_operator_row[pos_1+1:pos_2])
-    new_operator_row.append(energy_val)
-    new_operator_row.append(multiplicity_val)
+    the_pos_1=the_operator_row.index("(")
+    the_pos_2=the_operator_row.index(")")
+    the_pos_3=the_operator_row.index("\n")
+    the_new_operator_row=[]
+    the_energy_val=float(the_operator_row[0:the_pos_1])
+    the_multiplicity_val=int(the_operator_row[the_pos_1+1:the_pos_2])
+    the_new_operator_row.append(the_energy_val)
+    the_new_operator_row.append(the_multiplicity_val)
     if "*" in the_operator_row:
-        pos_4=the_operator_row.index("*")
-        operators_string=the_operator_row[pos_2+1:pos_4]
-        while " " in operators_string: operators_string=operators_string.replace(" ", "")
-        new_operator_row.append(operators_string)
-        new_operator_row.append(the_operator_row[pos_4:pos_4+3])
+        the_pos_4=the_operator_row.index("*")
+        the_operators_string=the_operator_row[the_pos_2+1:the_pos_4]
+        while " " in the_operators_string: the_operators_string=the_operators_string.replace(" ", "")
+        the_new_operator_row.append(the_operators_string)
+        the_new_operator_row.append(the_operator_row[the_pos_4:the_pos_4+3])
     elif "#" in the_operator_row:
-        pos_4=the_operator_row.index("#")
-        operators_string=the_operator_row[pos_2+1:pos_4]
-        while " " in operators_string: operators_string=operators_string.replace(" ", "")
-        new_operator_row.append(operators_string)
-        new_operator_row.append(the_operator_row[pos_4:pos_4+4])
+        the_pos_4=the_operator_row.index("#")
+        the_operators_string=the_operator_row[the_pos_2+1:the_pos_4]
+        while " " in the_operators_string: the_operators_string=the_operators_string.replace(" ", "")
+        the_new_operator_row.append(the_operators_string)
+        the_new_operator_row.append(the_operator_row[the_pos_4:the_pos_4+4])
     else:
-        operators_string=the_operator_row[pos_2+1:pos_3]
-        while " " in operators_string: operators_string=operators_string.replace(" ", "")
-        new_operator_row.append(operators_string)
-    return new_operator_row
-
-
-
+        the_operators_string=the_operator_row[the_pos_2+1:the_pos_3]
+        while " " in the_operators_string: the_operators_string=the_operators_string.replace(" ", "")
+        the_new_operator_row.append(the_operators_string)
+    return the_new_operator_row
 
 
 
@@ -158,17 +188,23 @@ def SPLITTING_THE_OPERATORS_ROW(the_operator_row):
 
 
 
-    # This function calculates the final energy of a certain non-interacting level in lattice units.
-    # If there is no information about the hadron in that ensemble, then it uses the values of E250
-def CALCULATING_FINAL_ENERGY(the_operators, the_list_of_masses, latt_extent, the_sqred_lattice_momentum,the_unknown,the_ecm):
-    reordered_masses=list(zip(*the_list_of_masses))
+### This function calculates the final energy of a certain non-interacting level in lattice units.
+### If there is no information about the hadron in that ensemble, then it uses the values of E250
+# the_operators: [hadron name, squared momentum]
+# the_list_of_masses: Is the list of masses known for this ensemble
+# the_latt_extent: the lattice constant a
+# the_sqred_lattice_momentum: is the squared momentum in the center of mass frame
+# the_unknown: these are the unknown masses for a specific ensemble.
+# the_ecm: Moves the energy calculation from lab frame to the center of mass frame
+def CALCULATING_FINAL_ENERGY(the_operators, the_list_of_masses, the_latt_extent, the_sqred_lattice_momentum, the_unknown, the_ecm):
+    the_reordered_masses=list(zip(*the_list_of_masses))
     the_total_energy = 0.
     for item in the_operators:
-        the_had_mom = MOMENTUM_COMPUTATION(float(item[1]), latt_extent)
-        if item[0] not in reordered_masses[0]:
+        the_had_mom = MOMENTUM_COMPUTATION(float(item[1]), the_latt_extent)
+        if item[0] not in the_reordered_masses[0]:
             if the_unknown: the_had_mass = ensE250[item[0]]
             else: the_total_energy=0.;break
-        else: the_had_mass = float(reordered_masses[1][reordered_masses[0].index(item[0])])
+        else: the_had_mass = float(the_reordered_masses[1][the_reordered_masses[0].index(item[0])])
         the_energy_for_one_hadron = np.sqrt(RELATIVISTIC_RELATION(the_had_mass, the_had_mom))
         the_total_energy += float(the_energy_for_one_hadron)
     if the_ecm:
@@ -178,38 +214,47 @@ def CALCULATING_FINAL_ENERGY(the_operators, the_list_of_masses, latt_extent, the
         else:
             if the_total_energy==0.:the_energy_cm=0.
             else:
-                the_mom=MOMENTUM_COMPUTATION(float(the_sqred_lattice_momentum),latt_extent)
+                the_mom=MOMENTUM_COMPUTATION(float(the_sqred_lattice_momentum),the_latt_extent)
                 the_energy_cm=SHIFT_TO_ECM(the_total_energy,the_mom)
-        return the_energy_cm/float(reordered_masses[1][reordered_masses[0].index("N")])
-    else: return the_total_energy/float(reordered_masses[1][reordered_masses[0].index("N")])
+        return the_energy_cm/float(the_reordered_masses[1][the_reordered_masses[0].index("N")])
+    else: return the_total_energy/float(the_reordered_masses[1][the_reordered_masses[0].index("N")])
 
 
 
 
 
-    # It calculates all the energy levels and returns them in a list: {energy, multiplicity, operators}
-def ENERGY_LIST_RAW(the_flavor_sector, the_list_of_masses, latt_extent, the_sqred_lattice_momentum,the_unknown,the_ecm):
-    energy_multi_hads_list=[]
+### It calculates all the energy levels and returns them in a list: {energy, multiplicity, operators}
+# the_flavor_sector: this is the line in the txt file that contains the energy, multiplicity and operators
+# the_list_of_masses: the list of known masses for a certain ensemble
+# the_latt_extent" the lattice constant a
+# the_sqred_lattice_momentum: suqared of momentum in the center of mass frame
+# the_unknown: the unknown masses for this ensemble are taken from the E250
+# the_ecm: It calculates the energy in the center of mass frame
+def ENERGY_LIST_RAW(the_flavor_sector, the_list_of_masses, the_latt_extent, the_sqred_lattice_momentum, the_unknown, the_ecm):
+    the_energy_multi_hads_list=[]
     for i in range(len(the_flavor_sector)):
         the_row = SPLITTING_THE_OPERATORS_ROW(the_flavor_sector[i])
         the_hadrons_row = the_row[2]
         hadrons_and_momenta = HADRONS_INFO_AND_MOMENTUM(the_hadrons_row,the_sqred_lattice_momentum)
-        the_energy = CALCULATING_FINAL_ENERGY(hadrons_and_momenta, the_list_of_masses, latt_extent, the_sqred_lattice_momentum,the_unknown,the_ecm) 
+        the_energy = CALCULATING_FINAL_ENERGY(hadrons_and_momenta, the_list_of_masses, the_latt_extent, the_sqred_lattice_momentum,the_unknown,the_ecm) 
         if the_energy==0.: i=i+1
         else:
-            if len(the_row)>3: energy_multi_hads_list.append([the_energy, the_row[1], the_row[2] + " " + the_row[3]])
-            else: energy_multi_hads_list.append([the_energy, the_row[1], the_row[2]])
-    new_multi_hads_list= sorted(energy_multi_hads_list, key=lambda k:[k[0], k[1], k[2]])
+            if len(the_row)>3: the_energy_multi_hads_list.append([the_energy, the_row[1], the_row[2] + " " + the_row[3]])
+            else: the_energy_multi_hads_list.append([the_energy, the_row[1], the_row[2]])
+    new_multi_hads_list= sorted(the_energy_multi_hads_list, key=lambda k:[k[0], k[1], k[2]])
     return new_multi_hads_list
 
 
 
 
-    # It prepares everything to be in a filtered list like: {energy, multiplicity, operators} (The cutoff happens here)
-def ENERGY_LIST_TABLES(the_hadrons_energy_list,the_threshold,threeparticle):
+### It prepares everything to be in a filtered list like: {energy, multiplicity, operators} (The cutoff happens here)
+# the_hadrons_energy_list: This is the final list to put in the tables
+# the_threshold: This is the point where the full list of energies is cut
+# the_threeparticle: is a boolean that tells to cut one level after the three particle threshold
+def ENERGY_LIST_TABLES(the_hadrons_energy_list, the_threshold, the_threeparticle):
     the_final_energy_list=[]
     for i in range(len(the_hadrons_energy_list)):
-        if threeparticle==True:
+        if the_threeparticle==True:
             if float(the_hadrons_energy_list[i][0])>the_threshold:
                 if float(the_hadrons_energy_list[i][0])<=the_threshold*1.05:
                     the_final_energy_list.append(the_hadrons_energy_list[i])
@@ -225,6 +270,17 @@ def ENERGY_LIST_TABLES(the_hadrons_energy_list,the_threshold,threeparticle):
 
 
 
+def FINAL_LIST_OF_OPERATORS(the_hadrons_list,the_sqred_lattice_momentum):
+    the_hadrons_and_momenta=[]
+    for ii in range(len(the_hadrons_list)):
+        the_hads_mom = HADRONS_INFO_AND_MOMENTUM(the_hadrons_list[ii][2],the_sqred_lattice_momentum)
+        for item in the_hads_mom:
+            the_new_item = item[0]+'('+str(item[1])+')'
+            if the_new_item in the_hadrons_and_momenta: continue
+            else:the_hadrons_and_momenta.append(the_new_item)
+    return the_hadrons_and_momenta
+
+
 ###############################################################
 #                                                             #
 #       Extra function to reorganize, to prepare things       #
@@ -234,9 +290,12 @@ def ENERGY_LIST_TABLES(the_hadrons_energy_list,the_threshold,threeparticle):
 
 
 
-
-     # It reorganizes the list of selected levels to plot them in increasing sqred momentum.
-def LIST_FOR_PLOT(the_irrep,the_sqred_mom,the_energy_list, the_energy_list_plot):
+### It reorganizes the list of selected levels to plot them in increasing sqred momentum.
+# the_irrep: The info of the irreducible representation
+# the_sqred_mom: the squared momentum in this irrep
+# the_energy_list: the energy list to be included in the tables
+# the_energy_list_plot: the list for the plots.
+def LIST_FOR_PLOT(the_irrep, the_sqred_mom, the_energy_list, the_energy_list_plot):
     for zz in range(len(the_energy_list)):
         the_energy_list_plot.append([the_irrep,the_sqred_mom,the_energy_list[zz][0], the_energy_list[zz][2]])
     return the_energy_list_plot
@@ -244,7 +303,8 @@ def LIST_FOR_PLOT(the_irrep,the_sqred_mom,the_energy_list, the_energy_list_plot)
 
 
 
-    # It counts how many different irreps are there to plot.
+### It counts how many different irreps are there to plot.
+# an_energy_list: the final list, it counts how many levels to plot in the end.
 def HOW_MANY_LEVELS_PLOT(an_energy_list):
     the_first_irrep=an_energy_list[0][0]
     how_many_levels=1
@@ -399,14 +459,5 @@ def GETTING_THRESHOLDS(the_ensemble,the_thresholds_list):
     return the_final_thresholds
     
 
-
-def FINAL_LIST_OF_OPERATORS(the_hadrons_list):
-    the_hadrons_and_momenta=[]
-    for ii in range(len(the_hadrons_list)):
-        the_hads_mom = HADRONS_INFO_AND_MOMENTUM(the_hadrons_list[ii][3],the_hadrons_list[ii][1])
-        for item in the_hads_mom:
-            if item in the_hadrons_and_momenta: continue
-            else:the_hadrons_and_momenta.append(item)
-    return the_hadrons_and_momenta
 
 

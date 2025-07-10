@@ -149,6 +149,7 @@ if __name__=='__main__':
         for item in range(len(ensChoices)):
             
             hadronsPlot=[]
+            finalListHadrons=[]
             
             doc.append(NewPage())
             with doc.create(Section('Ensemble %s'%ensChoices[item]["ens_name"])):        
@@ -232,16 +233,22 @@ if __name__=='__main__':
                                 
                                 if not noEnergyCut:
                                     final_energy_list=enf.ENERGY_LIST_TABLES(final_hadrons_list,chosenThreshold,threeParticleThreshold)
-                                    #if len(final_energy_list)==0:break
                                 else: 
                                     final_energy_list=final_hadrons_list 
                                 tl.CONSTRUCTING_TABLES(doc,final_energy_list,tabHeaders, tabCaption)
                                 
                                 levelsPlot=enf.LIST_FOR_PLOT(disIrrep,str(psqMom),final_energy_list,hadronsPlot)
+                                
+                                irrepHadronsList = enf.FINAL_LIST_OF_OPERATORS(final_energy_list,str(psqMom))
+                                for ll in range(len(irrepHadronsList)):
+                                    if irrepHadronsList[ll] not in finalListHadrons: finalListHadrons.append(irrepHadronsList[ll])
 
                     doc.append(NewPage())
             
-            
+            for xx in range(len(finalListHadrons)):
+                finalListHadrons[xx] = [finalListHadrons[xx], enf.POSSIBLE_MOMENTUM_HADRONS(finalListHadrons[xx])]
+                
+                
             if plotEnergyLevels: 
                 namePlot="EnergyLevels_plot_"+hadronType+"_"+totalIsospin+"_"+totalStrangeness+"_"+numberBaryons+"_%s.pdf"%ensChoices[item]["ens_name"]
                 
@@ -258,6 +265,8 @@ if __name__=='__main__':
                     plot = os.path.join(os.path.dirname(__file__), namePlot)
                     with doc.create(Figure(position='h!')) as energies_plot:
                         energies_plot.add_image(plot, width='400px')
-                        energies_plot.add_caption(NoEscape('Summary of expected energy levels (%s). Orange lines are relevant thresholds. Irreps are in the x-axis, and momentum in the form $P_{tot}^{2}=P_{x}^{2} + P_{y}^{2} + P_{z}^{2}$ is in parenthesis. '%ensChoices[item]["ens_name"]))
+                        energies_plot.add_caption(NoEscape('Summary of expected energy levels (%s). Orange lines are relevant thresholds. Irreps are in the $x$-axis, and momentum in the form $P_{tot}^{2}=P_{x}^{2} + P_{y}^{2} + P_{z}^{2}$ is in parenthesis. '%ensChoices[item]["ens_name"]))
+                        
+            tl.TABLE_TWOCOLS(doc, list(sorted(list(sorted(finalListHadrons, key=lambda k: [k[0][k[0].index('(')+1: k[0].index(')')], k[1] ])), key=lambda k: [k[0], k[1]])), ['Hadron', 'Momentum'], 'All needed hadrons with their corresponding momentum.')
                 
         doc.generate_pdf("Operators_"+hadronType+"_"+totalIsospin+"_"+totalStrangeness+"_"+numberBaryons, clean_tex=True)

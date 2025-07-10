@@ -8,7 +8,19 @@ from energy_functions import *
 
 #--------------  TEX TABLES HADRONS  ----------------
 
-
+    # It creates the TeX tables
+def TABLE_TWOCOLS(the_doc, the_hadrons_list, the_headers, the_caption):
+    with the_doc.create(Table(position = 'h!')) as main_table:
+        with the_doc.create(Tabularx('l l', col_space='.75cm')) as table:            
+            table.add_hline()
+            table.add_row((the_headers[0], the_headers[1]))
+            table.add_hline()
+            table.add_hline()
+            for i in range(len(the_hadrons_list)):
+                table.add_row(str(the_hadrons_list[i][0]), the_hadrons_list[i][1])
+            table.add_hline()
+        main_table.add_caption(the_caption) 
+        
     # It creates the TeX tables
 def TABLE_THREECOLS_ENERGIES(the_doc, the_hadrons_list, the_headers, the_caption):
     with the_doc.create(Table(position = 'h!')) as main_table:
@@ -129,11 +141,14 @@ def PLOT_ENERGY_LEVELS(list_of_energies,the_ref_levels,the_y_axis_label,the_name
     for ii in range(len(the_ref_levels)):
         plt.hlines(the_ref_levels[ii][0], xmin=-2, xmax=the_nr_levels+1, ls=line_styles[ii],lw=1.25,color="#f57600",label=the_ref_levels[ii][1])
         plt.legend(loc='lower right')
-    plt.xlim([-1, the_nr_levels])
-    plt.xlabel('Irreps')
-    plt.xticks(rotation=60)
-    plt.ylabel(the_y_axis_label)
+        # the_plot.legend(loc='outside upper center')
+    plt.xlim([-.5, the_nr_levels+.5])
+    plt.xlabel(r'Irreps',fontsize=11)
+    plt.xticks(rotation=60,fontsize=11)
+    plt.ylabel(the_y_axis_label,fontsize=11)
     plt.tight_layout()
+    # the_plot.legend(loc='lower right')
+    # plt.show()
     the_plot.savefig(the_name_plot)
     
     
