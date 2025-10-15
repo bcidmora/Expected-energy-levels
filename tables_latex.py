@@ -146,7 +146,6 @@ def PLOT_ENERGY_LEVELS(list_of_energies,the_ref_levels,the_y_axis_label,the_name
     plt.xlabel('Irreducible representations',fontsize=12)
     plt.xticks(rotation=45,fontsize=11)
     plt.ylabel(the_y_axis_label,fontsize=11)
-
     fig=plt.gcf()
     axes=fig.axes
     top_y = max(ax.get_position().y1 for ax in axes)
