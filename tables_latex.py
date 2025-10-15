@@ -130,26 +130,28 @@ def TABLE_TWOCOLS_OPERATORS(the_doc, the_hadrons_list, the_headers, the_caption)
     
     
 
+
 def PLOT_ENERGY_LEVELS(list_of_energies,the_ref_levels,the_y_axis_label,the_name_plot,the_nr_levels):
     line_styles=["--","-","-.",":"]
-    line_colors=["#c44601","#f57600","#5ba300","#e6308a"]
+    line_colors=["#b90f22", "#5d83d5","#ffa500","#008000","#c44601","#f57600","#5ba300","#e6308a" ]
     the_plot = plt.figure()
     for ii in range(len(list_of_energies)):
-        x_axis, y_axis = list_of_energies[ii][0]+"(%s)"%str(list_of_energies[ii][1]), list_of_energies[ii][2]
+        the_name_irrep = PLOT_HADRON_LABELINGS(list_of_energies[ii][0])
+        x_axis, y_axis = the_name_irrep+"(%s)"%str(list_of_energies[ii][1]), list_of_energies[ii][2]
         plt.rc('axes', labelsize=10) 
-        plt.plot(x_axis, y_axis, marker='_', ls='None', ms=15, markeredgewidth=1.5, lw=0.85, zorder=3, color = '#054fb9')
+        plt.plot(x_axis, y_axis, marker='_', ls='None', ms=20, markeredgewidth=2.5, lw=0.95, zorder=3, color = line_colors[1])
     for ii in range(len(the_ref_levels)):
-        plt.hlines(the_ref_levels[ii][0], xmin=-2, xmax=the_nr_levels+1, ls=line_styles[ii],lw=1.25,color="#f57600",label=the_ref_levels[ii][1])
-        plt.legend(loc='lower right')
-        # the_plot.legend(loc='outside upper center')
-    plt.xlim([-.5, the_nr_levels+.5])
-    plt.xlabel(r'Irreps',fontsize=11)
-    plt.xticks(rotation=60,fontsize=11)
+        plt.hlines(the_ref_levels[ii][0], xmin=-2, xmax=the_nr_levels+1, ls=line_styles[ii],lw=1.25,color=line_colors[0],label=the_ref_levels[ii][1])
+    plt.xlim([-.5, the_nr_levels+.05])
+    plt.xlabel('Irreducible representations',fontsize=12)
+    plt.xticks(rotation=45,fontsize=11)
     plt.ylabel(the_y_axis_label,fontsize=11)
-    plt.tight_layout()
-    # the_plot.legend(loc='lower right')
-    # plt.show()
-    the_plot.savefig(the_name_plot)
+
+    fig=plt.gcf()
+    axes=fig.axes
+    top_y = max(ax.get_position().y1 for ax in axes)
+    the_plot.legend(loc='upper center', bbox_to_anchor=(0.5, top_y+0.08), ncol = len(the_ref_levels))
+    the_plot.savefig(the_name_plot, bbox_inches='tight')
     
     
     
