@@ -92,6 +92,55 @@ def POSSIBLE_MOMENTUM_HADRONS(the_hadron):
         return 'P = (2, 1, 1)'
 #     
 
+
+def PLOT_HADRON_LABELINGS(the_irrep_name):
+    the_irrep_name = the_irrep_name.replace(" ","")
+    the_irrep_name_plot = ''
+    if the_irrep_name=="G1g": 
+        the_irrep_name_plot = r'$G_{1g}$'
+    elif the_irrep_name=="G1u": 
+        the_irrep_name_plot = r'$G_{1u}$'
+    elif the_irrep_name=="Hg": 
+        the_irrep_name_plot = r'$H_{g}$'
+    elif the_irrep_name=="Hu": 
+        the_irrep_name_plot = r'$H_{u}$'
+    elif the_irrep_name=="G1": 
+        the_irrep_name_plot = r'$G_{1}$'
+    elif the_irrep_name=="G2": 
+        the_irrep_name_plot = r'$G_{2}$'
+    elif the_irrep_name=="G": 
+        the_irrep_name_plot = r'$G$'
+    elif the_irrep_name=="F1": 
+        the_irrep_name_plot = r'$F_{1}$'
+    elif the_irrep_name=="F2": 
+        the_irrep_name_plot = r'$F_{2}$'
+    elif the_irrep_name=="A1um": 
+        the_irrep_name_plot = r'$A_{1u}^{-}$'
+    elif the_irrep_name=="A1u": 
+        the_irrep_name_plot = r'$A_{1u}$'
+    elif the_irrep_name=="A1g": 
+        the_irrep_name_plot = r'$A_{1g}$'
+    elif the_irrep_name=="A2m": 
+        the_irrep_name_plot = r'$A_{2m}$'
+    elif the_irrep_name=="A2g": 
+        the_irrep_name_plot = r'$A_{2g}$'
+    elif the_irrep_name=="A1u": 
+        the_irrep_name_plot = r'$A_{2u}$'
+    elif the_irrep_name=="Eg": 
+        the_irrep_name_plot = r'$E_{g}$'
+    elif the_irrep_name=="Eu": 
+        the_irrep_name_plot = r'$E_{u}$'
+    elif the_irrep_name=="T1g": 
+        the_irrep_name_plot = r'$T_{1g}$'
+    elif the_irrep_name=="T1u": 
+        the_irrep_name_plot = r'$T_{1u}$'
+    elif the_irrep_name=="T2g": 
+        the_irrep_name_plot = r'$T_{2g}$'
+    elif the_irrep_name=="T2u": 
+        the_irrep_name_plot = r'$T_{2u}$'
+    return the_irrep_name_plot
+
+
 #--------------  MODIFICATIONS TO THE HADRON NAME SCHEME  ---------------- 
 #-------------------  OR SOMETHING LIKE THAT ---------------- 
 
