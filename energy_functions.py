@@ -425,16 +425,16 @@ def MENU_QUANTUM_NUMBERS():
     # It gives the selection of ensembles that are available to be computed.
 def MENU_ENSEMBLES():
     print("For which ensemble(s) do you want to obtain the expected energy levels?")
-    print("   [1] E250 \n   [2] B451 \n   [3] B452 \n   [4] B450 \n   [5] N452 \n   [6] N451 \n   [7] N200 \n   [8] N201 \n   [9] X252 \n   [10] X253 \n   [11] X451 \n   [12] D251 \n   [13] All")
+    print("   [1] E250 \n   [2] B451 \n   [3] B452 \n   [4] B450 \n   [5] N452 \n   [6] N451 \n   [7] N200 \n   [8] N201 \n   [9] X252 \n   [10] X253 \n   [11] X451 \n   [12] D251 \n   [13] D200 \n   [14] All")
     whichEnsemble=str(input('The choice can be an integer or op1,op2,...\n'))
     ensChoices=[]
     if "," in whichEnsemble:
         ensChoices_pre=whichEnsemble.split(",")
         for num in ensChoices_pre:
             ensChoices.append(ens.ensembleList[int(num)-1])
-    elif whichEnsemble=="All" or "13" in whichEnsemble:
+    elif whichEnsemble=="All" or "14" in whichEnsemble:
         ensChoices=ens.ensembleList
-    elif int(whichEnsemble)<14:
+    elif int(whichEnsemble)<15:
         ensChoices.append(ens.ensembleList[int(whichEnsemble)-1])
     else:
         print("Incorrect choice.")
