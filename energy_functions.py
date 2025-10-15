@@ -100,6 +100,10 @@ def PLOT_HADRON_LABELINGS(the_irrep_name):
         the_irrep_name_plot = r'$G_{1g}$'
     elif the_irrep_name=="G1u": 
         the_irrep_name_plot = r'$G_{1u}$'
+    elif the_irrep_name=="G2g": 
+        the_irrep_name_plot = r'$G_{2g}$'
+    elif the_irrep_name=="G2u": 
+        the_irrep_name_plot = r'$G_{2u}$'
     elif the_irrep_name=="Hg": 
         the_irrep_name_plot = r'$H_{g}$'
     elif the_irrep_name=="Hu": 
