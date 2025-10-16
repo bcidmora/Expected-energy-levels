@@ -145,6 +145,36 @@ def PLOT_HADRON_LABELINGS(the_irrep_name):
     return the_irrep_name_plot
 
 
+def PLOT_SINGLE_HADRON_NAMES(the_hadron_name):
+    the_plot_hadron_name = ''
+    if the_hadron_name=='pi':
+        the_plot_hadron_name=r'$\pi$'
+    elif the_hadron_name=='K':
+        the_plot_hadron_name=r'$K$'
+    elif the_hadron_name=='KB':
+        the_plot_hadron_name=r'$\bar{K}$'
+    elif the_hadron_name=='eta':
+        the_plot_hadron_name=r'$\eta$'
+    elif the_hadron_name=='N':
+        the_plot_hadron_name=r'$N$'
+    elif the_hadron_name=='etaprime-958':
+        the_plot_hadron_name=r"$\eta'$"
+    elif the_hadron_name=='Lambda':
+        the_plot_hadron_name=r'$\Lambda$'
+    elif the_hadron_name=='Sigma':
+        the_plot_hadron_name=r'$\Sigma$'
+    elif the_hadron_name=='Delta-1232':
+        the_plot_hadron_name=r'$\Delta$'
+    elif the_hadron_name=='Xi':
+        the_plot_hadron_name=r'$\Xi$'
+    elif the_hadron_name=='Sigma-1385':
+        the_plot_hadron_name=r'$\Sigma^{*+}$'
+    elif the_hadron_name=='Xi-1530':
+        the_plot_hadron_name=r'$\Xi^{*0}$'
+    elif the_hadron_name=='Omega':
+        the_plot_hadron_name=r'$\Omega^{-}$'
+    return the_plot_hadron_name
+    
 #--------------  MODIFICATIONS TO THE HADRON NAME SCHEME  ---------------- 
 #-------------------  OR SOMETHING LIKE THAT ---------------- 
 
@@ -479,7 +509,9 @@ def MENU_HADRONS():
         elif item==11:
             the_hadron.append(["xistar_mass",r'$\Xi*$'])
         elif item==12:
-            the_hadron.append(["omega_mass",r'$\Omega$'])
+            the_hadron.append(["omega_mass",r'$\Omega^{-}$'])
+        elif item==13:
+            the_hadron.append(["Dmeson_mass",r'$D$'])
     return the_hadron
            
 
