@@ -179,7 +179,7 @@ if __name__=='__main__':
                             
                             ['Xi-1530', '%s'%str(ensChoices[item]["xistar_mass"]), '%s'%str(enf.FM_TO_MEV(ensChoices[item]["xistar_mass"], ensChoices[item]["latt_spacing"])), NoEscape('$3/2^{+}$')],
                             
-                            ['Omega', '%s'%str(ensChoices[item]["omega_mass"]), '%s'%str(enf.FM_TO_MEV(ensChoices[item]["omega_mass"], ensChoices[item]["latt_spacing"])), NoEscape('$3/2^{-}$')]
+                            ['Omega', '%s'%str(ensChoices[item]["omega_mass"]), '%s'%str(enf.FM_TO_MEV(ensChoices[item]["omega_mass"], ensChoices[item]["latt_spacing"])), NoEscape('$3/2^{+}$')]
                             ]
                 try:
                     hadronsInfo.append(['rho-770', '%s'%str(ensChoices[item]["rho_mass"]), '%s'%str(enf.FM_TO_MEV(ensChoices[item]["rho_mass"], ensChoices[item]["latt_spacing"])), NoEscape('$1^{-}$') ])
