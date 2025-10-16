@@ -1,5 +1,3 @@
-
-
 ensE250 = {
     "ens_name":"E250",
     "cls_name": "E250r001", 
@@ -69,7 +67,7 @@ ensE250 = {
     "Sigma-1660": 0.54681, #E250
     "Lambda-1670": 0.550102, #E250
     "Sigma-1670":   0.550102, #E250
-    "omega_mass": 0.55669,
+    "omega_mass": 0.55669, # Omega(1670) 3/2+
     "Lambda-1690": 0.55669, #E250
     "Delta-1700": 0.5599841, #E250
     "Sigma-1750": 0.576454, #E250
@@ -93,15 +91,16 @@ ensD200 = {
     "kaon_mass": 0.15602,
     "eta_mass": 0.1768,
     "nucleon_mass": 0.3143,
-    # "etaprime_mass": 0.37, 
+    "etaprime_mass": 0.37, 
     "lambda_mass": 0.3634,
     "sigma_mass": 0.3830,
     "xi_mass": 0.41543,
     "delta_mass": 0.41402,
-    "lambda1405_mass": 0.46672#,
-    # "sigmastar_mass": 0.6142, 
-    # "xistar_mass": 0.6414,
+    "lambda1405_mass": 0.46672,
+    "sigmastar_mass": 0.6142, 
+    "xistar_mass": 0.6414,
     # "omega_mass": 0.6683
+    "omega_mass": 0.5218
 }
 
 ensB451 = {
@@ -176,7 +175,8 @@ ensB450 = {
     "delta_mass": 0.5619,
     "sigmastar_mass": 0.5619, 
     "xistar_mass": 0.5619,
-    "omega_mass": 0.5619 
+    # "omega_mass": 0.5619
+    "omega_mass": 0.5549
 }
 
 ensN452 = {
@@ -216,20 +216,25 @@ ensN451 = {
     "s_kappa": 0.1365480771,
     "clov_coeff": 1.915595,
     "cnfgs": 1011,
-    "pion_mass": 0.1104732,
-    "kaon_mass": 0.1780265,
+    # "pion_mass": 0.1104732,
+    "pion_mass": 0.11072,
+    # "kaon_mass": 0.1780265,
+    "kaon_mass": 0.17824,
     "eta_mass": 0.1858,
     "rho_mass": 0.293,
     "nucleon_mass": 0.3965,
     "etaprime_mass": 0.303, 
     "lambda_mass": 0.4309,
     "sigma_mass": 0.4492,
-    "xi_mass": 0.4758,
+    # "xi_mass": 0.4758,
+    "xi_mass": 0.4799,
     "delta_mass": 0.5141,
     "sigmastar_mass": 0.5428, 
     "lambda1405_mass": 0.56, # guessed value
-    "xistar_mass": 0.5728,
-    "omega_mass": 0.5979
+    # "xistar_mass": 0.5728,
+    "xistar_mass": 0.572,
+    # "omega_mass": 0.5979
+    "omega_mass": 0.5946
 }
 
 ensN200 = {
@@ -255,7 +260,8 @@ ensN200 = {
     "delta_mass": 0.426,
     "sigmastar_mass": 0.4575, 
     "xistar_mass": 0.4845,
-    "omega_mass": 0.5083 
+    # "omega_mass": 0.5083 
+    "omega_mass": 0.5068 
 }
 
 ensN201 = {
@@ -356,12 +362,16 @@ ensX451 = {
     "etaprime_mass": 0.303, 
     "lambda_mass": 0.4309,
     "sigma_mass": 0.4492,
-    "xi_mass": 0.4758,
+    # "xi_mass": 0.4758,
+    "xi_mass": 0.4799,
     "delta_mass": 0.5141,
     "sigmastar_mass": 0.5428, 
     "lambda1405_mass": 0.56, # guessed value
-    "xistar_mass": 0.5728,
-    "omega_mass": 0.5979
+    # "xistar_mass": 0.5728,
+    "xistar_mass": 0.572,
+    # "omega_mass": 0.5979,
+    "omega_mass": 0.5936,
+    "Dmeson_mass":0.76
 }
 
 ensD251 = {
