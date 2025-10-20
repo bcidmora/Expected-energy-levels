@@ -92,6 +92,54 @@ def POSSIBLE_MOMENTUM_HADRONS(the_hadron):
         return 'P = (2, 1, 1)'
 #     
 
+#--------------  MODIFICATIONS TO THE HADRON NAME SCHEME  ---------------- 
+#-------------------  OR SOMETHING LIKE THAT ---------------- 
+
+#########################################################################
+#                                                                       #
+#                                                                       #
+#       ** Hadrons info and momentum:                                   #
+#        Extracts the momentum for each hadron in the string and        #
+#        it includes the corresponding momentum to those without        #
+#        explicit momentum.                                             #
+#                                                                       #
+#       ** Splitting the operators:                                     #
+#        It separates the line in Colin's file that has the energy,     #
+#        the multiplicity and the hadrons in that level.                #
+#                                                                       #
+#                                                                       #
+#                                                                       #
+#########################################################################
+
+
+
+
+### adds the momentum to the operator when there is no momentum in the operator name.
+# the_operator: is a string with all the operators in it such as pi_PSQ0_Sigma_PSQ3_isosinglet_0
+# the_sqred_lattice_momentum: is the squared momentum in the center of mass frame
+def HADRONS_INFO_AND_MOMENTUM(the_operator, the_sqred_lattice_momentum):
+    the_decomposed_operators = []
+    if 'PSQ' not in the_operator:
+        the_decomposed_operators.append([the_operator, int(the_sqred_lattice_momentum)])
+    else:
+        the_list_the_operators = the_operator.split('_')
+        for i in range(0, len(the_list_the_operators)-2, 2):
+            da_mom = the_list_the_operators[i+1][3:]
+            if len(da_mom)==1:
+                da_mom = the_list_the_operators[i+1][3]
+            elif len(da_mom)==2:
+                if da_mom[-1]=='A' or da_mom[-1]=='B':
+                    da_mom = the_list_the_operators[i+1][3]
+                else:
+                    da_mom = the_list_the_operators[i+1][3:]
+            elif len(da_mom)==3:
+                if da_mom[-1]=='A' or da_mom[-1]=='B':
+                    da_mom = the_list_the_operators[i+1][3:-1]
+                else:
+                    da_mom = the_list_the_operators[i+1][3:]
+            the_decomposed_operators.append([the_list_the_operators[i], int(da_mom)])
+    return the_decomposed_operators
+
 
 def PLOT_HADRON_LABELINGS(the_irrep_name):
     the_irrep_name = the_irrep_name.replace(" ","")
@@ -143,8 +191,8 @@ def PLOT_HADRON_LABELINGS(the_irrep_name):
     elif the_irrep_name=="T2u": 
         the_irrep_name_plot = r'$T_{2u}$'
     return the_irrep_name_plot
-
-
+    
+    
 def PLOT_SINGLE_HADRON_NAMES(the_hadron_name):
     the_plot_hadron_name = ''
     if the_hadron_name=='pi':
@@ -175,56 +223,6 @@ def PLOT_SINGLE_HADRON_NAMES(the_hadron_name):
         the_plot_hadron_name=r'$\Omega^{-}$'
     return the_plot_hadron_name
     
-#--------------  MODIFICATIONS TO THE HADRON NAME SCHEME  ---------------- 
-#-------------------  OR SOMETHING LIKE THAT ---------------- 
-
-#########################################################################
-#                                                                       #
-#                                                                       #
-#       ** Hadrons info and momentum:                                   #
-#        Extracts the momentum for each hadron in the string and        #
-#        it includes the corresponding momentum to those without        #
-#        explicit momentum.                                             #
-#                                                                       #
-#       ** Splitting the operators:                                     #
-#        It separates the line in Colin's file that has the energy,     #
-#        the multiplicity and the hadrons in that level.                #
-#                                                                       #
-#                                                                       #
-#                                                                       #
-#########################################################################
-
-
-
-
-### adds the momentum to the operator when there is no momentum in the operator name.
-# the_operator: is a string with all the operators in it such as pi_PSQ0_Sigma_PSQ3_isosinglet_0
-# the_sqred_lattice_momentum: is the squared momentum in the center of mass frame
-def HADRONS_INFO_AND_MOMENTUM(the_operator, the_sqred_lattice_momentum):
-    the_decomposed_operators = []
-    if 'PSQ' not in the_operator:
-        the_decomposed_operators.append([the_operator, int(the_sqred_lattice_momentum)])
-    else:
-        the_list_the_operators = the_operator.split('_')
-        for i in range(0, len(the_list_the_operators)-2, 2):
-            da_mom = the_list_the_operators[i+1][3:]
-            if len(da_mom)==1:
-                da_mom = the_list_the_operators[i+1][3]
-            elif len(da_mom)==2:
-                if da_mom[-1]=='A' or da_mom[-1]=='B':
-                    da_mom = the_list_the_operators[i+1][3]
-                else:
-                    da_mom = the_list_the_operators[i+1][3:]
-            elif len(da_mom)==3:
-                if da_mom[-1]=='A' or da_mom[-1]=='B':
-                    da_mom = the_list_the_operators[i+1][3:-1]
-                else:
-                    da_mom = the_list_the_operators[i+1][3:]
-            the_decomposed_operators.append([the_list_the_operators[i], int(da_mom)])
-    return the_decomposed_operators
-
-    
-
 
 ### separates the full operator string into separated hadrons with their momenta
 ## the_operator_row: It containes the energy levels with its multiplicity and the energy value and it splits them into a list (new_operator_row)
@@ -524,6 +522,7 @@ def CHOICE_THRESHOLDS_PLOT():
         print("For threshold nr. %s: "%(j+1))
         the_hadrons.append(MENU_HADRONS())
     return the_hadrons
+
 
 
     # it sums up all the hadron masses given (over the nucleon mass)
