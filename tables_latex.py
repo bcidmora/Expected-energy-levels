@@ -133,10 +133,7 @@ def TABLE_TWOCOLS_OPERATORS(the_doc, the_hadrons_list, the_headers, the_caption)
     
     
 
-
 def PLOT_ENERGY_LEVELS(list_of_energies,the_ref_levels,the_y_axis_label,the_name_plot,the_nr_levels):
-    #line_styles=["--","-","-.",":"]
-    #line_colors=["#b90f22", "#5d83d5","#ffa500","#008000","#c44601","#f57600","#5ba300","#e6308a" ]
     line_styles=["-","--","-.",":"]
     line_colors=["#b90f22", "#5d83d5","#ffa500","#008000","#c44601","#f57600","#5ba300","#e6308a" ]
     the_plot = plt.figure()
@@ -151,19 +148,19 @@ def PLOT_ENERGY_LEVELS(list_of_energies,the_ref_levels,the_y_axis_label,the_name
     for ii in range(len(the_ref_levels)):
         plt.hlines(the_ref_levels[ii][0], xmin=-2, xmax=the_nr_levels+1, ls=line_styles[ii],lw=1.5,color=line_colors[0],label=the_ref_levels[ii][1])
         if the_max_y<the_ref_levels[ii][0]: the_max_y=the_ref_levels[ii][0]
-    #plt.xlim([-.5, the_nr_levels+.05])
     plt.xlim([-.75, the_nr_levels-.25])
     plt.ylim([the_min_y*.97, the_max_y*1.03])
-    plt.xlabel('Irreducible representations',fontsize=13)
-    plt.xticks(rotation=45,fontsize=15)
-    plt.tick_params(axis='y', labelsize=15)
-    plt.ylabel(the_y_axis_label,fontsize=18)
+    # plt.xlabel('Irreducible representations',fontsize=13)
+    plt.xticks(rotation=45,fontsize=18)
+    plt.tick_params(axis='y', labelsize=18)
+    plt.ylabel(the_y_axis_label,fontsize=23)
     fig=plt.gcf()
     axes=fig.axes
     top_y = max(ax.get_position().y1 for ax in axes)
-    the_plot.legend(loc='upper center', bbox_to_anchor=(0.5, top_y+0.14), ncol = len(the_ref_levels),fontsize=15, columnspacing=0.75, handletextpad=0.3)
-    #plt.show()
+    the_plot.legend(loc='upper center', bbox_to_anchor=(0.5, top_y+0.14), ncol = len(the_ref_levels),fontsize=20, columnspacing=0.75, handletextpad=0.3)
+    # plt.show()
     the_plot.savefig(the_name_plot, bbox_inches='tight')
     
+
     
     
